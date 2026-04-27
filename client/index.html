@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robozobo Registration</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- HERO SECTION -->
+<div class="hero">
+ 
+  
+  <div class="bg-kids">
+  <div class="bubble b1"></div>
+  <div class="bubble b2"></div>
+  <div class="bubble b3"></div>
+  <div class="bubble b4"></div>
+</div>
+
+<div class="bg-animation">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+
+
+
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+
+    <!-- LEFT SIDE CONTENT -->
+    <div class="hero-content">
+      <div class="robot-box">
+      <img src="NO BG LOGO.png" class="logo" alt="Robozobo Logo">
+       </div>
+      <h1>Join Our Upcoming  <br>  Online Summer Camp 🚀</h1>
+
+    <p>
+  Register now to explore hands-on robotics, creative coding projects,
+  and fun-filled learning activities that prepare young minds for a bright future.
+</p>
+
+<div class="date-badge">
+  📅 Dates: 2nd May – 6th May
+</div>
+    </div>
+
+    <!-- RIGHT SIDE FORM -->
+    <div class="form-container">
+
+      <div class="form-card">
+
+        <h2>Register Now</h2>
+
+        <form id="form">
+
+          <!-- PHONE -->
+          <label>Mobile Number</label>
+          <div class="phone-box">
+            <select id="countryCode">
+              <option value="+91">+91</option>
+            </select>
+            <input type="text" id="phone" placeholder="Enter Mobile Number" required>
+          </div>
+
+          <!-- EMAIL -->
+          <label>Email</label>
+          <input type="email" id="email" placeholder="Enter Email" required>
+
+          <!-- CHILD NAME -->
+          <label>Child's Name</label>
+          <input type="text" id="name" placeholder="Enter Child Name" required>
+
+          <!-- PARENT NAME -->
+          <label>Parent's Name</label>
+          <input type="text" id="parent" placeholder="Enter Parent Name" required>
+
+          <!-- GRADE -->
+          <label>Grade</label>
+          <select id="grade">
+            <option disabled selected>Select Grade</option>
+            <option>Grade 3</option>
+            <option>Grade 4</option>
+            <option>Grade 5</option>
+            <option>Grade 6</option>
+             <option>Grade 7</option>
+            <option>Grade 8</option>
+            <option>Grade 9</option>
+            <option>Grade 10</option>
+          </select>
+
+          <!-- COURSE -->
+          <label>Course</label>
+          <select id="course">
+  <option disabled selected>Select Course</option>
+  <option value="Game Development">Game Development</option>
+  <!-- <option value="Alpha AI">Alpha AI</option> -->
+  <option value="Block-Coding">Block-Coding</option>
+</select>
+<label>Select Slot</label>
+
+<div class="slots">
+  <label><input type="radio" name="slot" value="10:30 - 11:15"> 10:30 - 11:15</label>
+  <label><input type="radio" name="slot" value="12:00 - 12:45"> 12:00 - 12:45</label>
+  <label><input type="radio" name="slot" value="3:00 - 3:45"> 3:00 - 3:45</label>
+  <label><input type="radio" name="slot" value="4:30 - 5:15"> 4:30 - 5:15</label>
+</div>
+          <!-- SUBMIT -->
+          <button type="submit">Register Now 🚀</button>
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<section class="features">
+
+  <div class="feature">
+    <h3>🤖 Learn Robotics</h3>
+    <p>Hands-on projects with real-world applications</p>
+  </div>
+
+  <div class="feature">
+    <h3>🎮 Build Games</h3>
+    <p>Create your own interactive games</p>
+  </div>
+
+  <div class="feature">
+    <h3>🧠 AI Learning</h3>
+    <p>Introduction to Artificial Intelligence</p>
+  </div>
+
+</section>
+
+<!-- 🎉 SUCCESS POPUP -->
+<div id="successPopup" class="popup">
+  <div class="popup-box">
+    <h2>🎉 Thank you for Registration!</h2>
+    <p>Kindly Check Your mail id <Mail-id></Mail-id> 🚀</p>
+    <button onclick="closePopup()">OK</button>
+    <div class="confetti-container" id="confetti"></div>
+  </div>
+</div>
+
+<!-- JS -->
+<script src="script.js"></script>
+
+</body>
+</html>

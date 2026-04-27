@@ -1,0 +1,39 @@
+// const mysql = require("mysql2");
+
+// const db = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "KOMAL",  
+//   database: "robozobo_db",
+//   port: 3306   
+// });
+
+// db.connect((err) => {
+//   if (err) {
+//     console.log("DB connection failed ❌");
+//     console.log(err);
+//   } else {
+//     console.log("MySQL Connected ✅");
+//   }
+// });
+
+// module.exports = db;
+
+const mysql = require("mysql2");
+
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "KOMAL",
+  database: "test"   // your existing DB
+});
+
+db.connect((err) => {
+  if (err) {
+    console.log("DB connection failed ❌", err);
+  } else {
+    console.log("MySQL Connected ✅");
+  }
+});
+
+module.exports = db;

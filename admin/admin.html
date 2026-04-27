@@ -1,0 +1,178 @@
+<!-- <!DOCTYPE html>
+<html>
+<body>
+
+<h2>Admin Dashboard</h2>
+<table border="1" id="table"></table>
+
+<script>
+fetch("http://localhost:5000/register")
+.then(res=>res.json())
+.then(data=>{
+  let html="<tr><th>Name</th><th>Email</th><th>Phone</th><th>Course</th></tr>";
+  data.forEach(u=>{
+    html+=`<tr>
+      <td>${u.name}</td>
+      <td>${u.email}</td>
+      <td>${u.phone}</td>
+      <td>${u.course}</td>
+    </tr>`;
+  });
+  document.getElementById("table").innerHTML=html;
+});
+</script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f8fafc;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background: #2563eb;
+      color: white;
+    }
+
+    input,
+    select,
+    button {
+      padding: 10px;
+      margin: 10px 5px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>📊 Registration Dashboard</h2>
+  <input type="text" id="search" placeholder="Search by name..." />
+  <select id="filterSlot">
+    <option value="">All Slots</option>
+    <option>10:30 - 11:15</option>
+    <option>12:00 - 12:45</option>
+    <option>3:00 - 3:45</option>
+    <option>4:30 - 5:15</option>
+  </select>
+
+  <p>Total Registrations: <span id="count"></span></p>
+
+  <table id="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Parent</th>
+        <th>Grade</th>
+        <th>Course</th>
+        <th>Slot</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <button onclick="downloadCSV()">Download CSV</button>
+  <script>
+   fetch("http://localhost:5000/admin/users")
+  .then(res => res.json())
+  .then(data => {
+    const tbody = document.querySelector("tbody");
+
+    data.forEach(user => {
+      const row = `
+        <tr>
+          <td>${user.name}</td>
+          <td>${user.email}</td>
+          <td>${user.phone}</td>
+          <td>${user.parent}</td>
+          <td>${user.grade}</td>
+          <td>${user.course}</td>
+          <td>${user.slot}</td>
+        </tr>
+      `;
+      tbody.innerHTML += row;
+    });
+
+    // ✅ FIX: put count here
+    document.getElementById("count").innerText = data.length;
+  });
+  
+    const search = document.getElementById("search");
+
+    search.addEventListener("input", () => {
+      const value = search.value.toLowerCase();
+      const rows = document.querySelectorAll("tbody tr");
+
+      rows.forEach(row => {
+        const name = row.children[0].innerText.toLowerCase();
+        row.style.display = name.includes(value) ? "" : "none";
+      });
+    });
+
+    const filter = document.getElementById("filterSlot");
+
+    filter.addEventListener("change", () => {
+      const value = filter.value;
+      const rows = document.querySelectorAll("tbody tr");
+
+      rows.forEach(row => {
+        const slot = row.children[6].innerText;
+        row.style.display = value === "" || slot === value ? "" : "none";
+      });
+    });
+
+    document.getElementById("count").innerText = data.length;
+
+    function downloadCSV() {
+      let csv = "Name,Email,Phone,Parent,Grade,Course,Slot\n";
+
+      document.querySelectorAll("tbody tr").forEach(row => {
+        const cols = row.querySelectorAll("td");
+        const rowData = Array.from(cols).map(td => td.innerText).join(",");
+        csv += rowData + "\n";
+      });
+
+      const blob = new Blob([csv], { type: "text/csv" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "registrations.csv";
+      a.click();
+    }
+  </script>
+
+</body>
+
+</html>
