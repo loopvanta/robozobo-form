@@ -26,8 +26,8 @@ const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "ipcsraipurcro@gmail.com",        // 👉 replace
-    pass: "qbgvfetfqllaywew"            // 👉 replace (NOT normal password)
+    user: "gem.risedge@gmail.com",        // 👉 replace
+    pass: "sedhmkkyaqwlfmqd"            // 👉 replace (NOT normal password)
   }
 });
 
