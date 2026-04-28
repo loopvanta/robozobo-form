@@ -26,7 +26,7 @@ if (!slot) {
 }
   try {
     // ===== SEND TO BACKEND =====
-    const res = await fetch("https://panoramic-unseeing-unstable.ngrok-free.dev/register", {
+    const res = await fetch("https://robozobo-form.onrender.com/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
