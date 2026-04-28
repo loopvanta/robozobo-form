@@ -52,7 +52,7 @@ exports.registerUser = (req, res) => {
     // 📧 SEND EMAIL
     try {
       await transporter.sendMail({
-        from: "ipcsraipurcro@gmail.com",
+        from: "gem.risedge@gmail.com",
         to: email,
         subject: "🎉 Registration Successful - Robozobo",
 
