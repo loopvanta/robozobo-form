@@ -49,43 +49,43 @@ exports.registerUser = (req, res) => {
       return res.status(500).send("Database Error");
     }
 
-    // 📧 SEND EMAIL
-    try {
-      await transporter.sendMail({
-        from: "gem.risedge@gmail.com",
-        to: email,
-        subject: "🎉 Registration Successful - Robozobo",
+        // ✅ SEND RESPONSE IMMEDIATELY (IMPORTANT)
+    res.status(200).send("Registered successfully 🎉");
 
-        html: `
-          <div style="font-family: Arial; padding: 20px;">
-            <h2>Welcome to Robozobo 🚀</h2>
+    // 📧 SEND EMAIL IN BACKGROUND (NON-BLOCKING)
+    transporter.sendMail({
+      from: "gem.risedge@gmail.com",
+      to: email,
+      subject: "🎉 Registration Successful - Robozobo",
 
-            <p>Hi <b>${name}</b>,</p>
+      html: `
+        <div style="font-family: Arial; padding: 20px;">
+          <h2>Welcome to Robozobo 🚀</h2>
 
-            <p>Your registration has been successfully completed 🎉</p>
+          <p>Hi <b>${name}</b>,</p>
 
-            <hr>
+          <p>Your registration has been successfully completed 🎉</p>
 
-            <p><b>📘 Course:</b> ${course}</p>
-            <p><b>🕒 Slot:</b> ${slot}</p>
-            <p><b>🎓 Grade:</b> ${grade}</p>
+          <hr>
 
-            <hr>
+          <p><b>📘 Course:</b> ${course}</p>
+          <p><b>🕒 Slot:</b> ${slot}</p>
+          <p><b>🎓 Grade:</b> ${grade}</p>
 
-            <p>We will contact you soon with further details.</p>
+          <hr>
 
-            <p style="margin-top:20px;">✨ Keep Learning & Keep Growing!</p>
-          </div>
-        `
-      });
+          <p>We will contact you soon with further details.</p>
 
-      console.log("Email sent ✅");
+          <p style="margin-top:20px;">✨ Keep Learning & Keep Growing!</p>
+        </div>
+      `
+    }, (error, info) => {
+      if (error) {
+        console.log("Email Error ❌", error.message);
+      } else {
+        console.log("Email sent ✅");
+      }
+    });
 
-    } catch (error) {
-      console.log("Email Error ❌", error.message);
-    }
-
-    // ✅ RESPONSE
-    res.send("Registered + Email Sent 🎉");
   });
 };
