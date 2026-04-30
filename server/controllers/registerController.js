@@ -19,26 +19,28 @@
 //   });
 // };
 
-const db = require("../db");
-const nodemailer = require("nodemailer");
+// const db = require("../db");
+// const nodemailer = require("nodemailer");
 
 // 🔐 EMAIL TRANSPORTER
-const transporter = nodemailer.createTransport({
-  // service: "gmail",
-  host: "smtp-relay.brevo.com",
-  port: 587,
-  secure: true,
-  auth: {
-  user: process.env.EMAIL_USER,
-  pass: process.env.EMAIL_PASS
-}
-});
+// const transporter = nodemailer.createTransport({
+//   // service: "gmail",
+//   host: "smtp-relay.brevo.com",
+//   port: 587,
+//   secure: true,
+//   auth: {
+//   user: process.env.EMAIL_USER,
+//   pass: process.env.EMAIL_PASS
+// }
+// });
+//  NEW CODE
+const db = require("../db");
+const axios = require("axios");
 
 // 📌 REGISTER FUNCTION
-exports.registerUser = (req, res) => {
+exports.registerUser = async (req, res) => {
   const { phone, email, name, parent, grade, course, slot } = req.body;
 
-  // 🧾 SQL QUERY
   const sql = `
     INSERT INTO users (phone, email, name, parent, grade, course, slot)
     VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -52,43 +54,40 @@ exports.registerUser = (req, res) => {
       return res.status(500).send("Database Error");
     }
 
-        // ✅ SEND RESPONSE IMMEDIATELY (IMPORTANT)
-    res.status(200).send("Registered successfully 🎉");
+    // 📧 SEND EMAIL USING BREVO API
+    try {
+      await axios.post(
+        "https://api.brevo.com/v3/smtp/email",
+        {
+          sender: { email: process.env.EMAIL_USER }, // your verified email
+          to: [{ email: email }],
+          subject: "🎉 Registration Successful - Robozobo",
+          htmlContent: `
+            <h2>Welcome to Robozobo 🚀</h2>
+            <p>Hi <b>${name}</b>,</p>
+            <p>Your registration has been successfully completed 🎉</p>
+            <hr>
+            <p><b>📘 Course:</b> ${course}</p>
+            <p><b>🕒 Slot:</b> ${slot}</p>
+            <p><b>🎓 Grade:</b> ${grade}</p>
+            <hr>
+            <p>We will contact you soon!</p>
+          `
+        },
+        {
+          headers: {
+            "api-key": process.env.BREVO_API_KEY,
+            "Content-Type": "application/json"
+          }
+        }
+      );
 
-    // 📧 SEND EMAIL IN BACKGROUND (NON-BLOCKING)
-    transporter.sendMail({
-      from: "gem.risedge@gmail.com",
-      to: email,
-      subject: "🎉 Registration Successful - Robozobo",
+      console.log("Mail sent ✅");
 
-      html: `
-        <div style="font-family: Arial; padding: 20px;">
-          <h2>Welcome to Robozobo 🚀</h2>
+    } catch (error) {
+      console.log("Mail error ❌", error.response?.data || error.message);
+    }
 
-          <p>Hi <b>${name}</b>,</p>
-
-          <p>Your registration has been successfully completed 🎉</p>
-
-          <hr>
-
-          <p><b>📘 Course:</b> ${course}</p>
-          <p><b>🕒 Slot:</b> ${slot}</p>
-          <p><b>🎓 Grade:</b> ${grade}</p>
-
-          <hr>
-
-          <p>We will contact you soon with further details.</p>
-
-          <p style="margin-top:20px;">✨ Keep Learning & Keep Growing!</p>
-        </div>
-      `
-    }, (error, info) => {
-      if (error) {
-        console.log("Email Error ❌", error.message);
-      } else {
-        console.log("Email sent ✅");
-      }
-    });
-
+    res.send("Registered + Email Sent 🎉");
   });
 };
