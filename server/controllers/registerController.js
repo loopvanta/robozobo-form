@@ -25,13 +25,13 @@ const nodemailer = require("nodemailer");
 // 🔐 EMAIL TRANSPORTER
 const transporter = nodemailer.createTransport({
   // service: "gmail",
-  host: "smtp.gmail.com",
-  port: 465,
+  host: "smtp-relay.brevo.com",
+  port: 587,
   secure: true,
   auth: {
-    user: "gem.risedge@gmail.com",        // 👉 replace
-    pass: "sedhmkkyaqwlfmqd"            // 👉 replace (NOT normal password)
-  }
+  user: process.env.EMAIL_USER,
+  pass: process.env.EMAIL_PASS
+}
 });
 
 // 📌 REGISTER FUNCTION
