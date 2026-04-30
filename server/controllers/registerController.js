@@ -24,7 +24,10 @@ const nodemailer = require("nodemailer");
 
 // 🔐 EMAIL TRANSPORTER
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  // service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
     user: "gem.risedge@gmail.com",        // 👉 replace
     pass: "sedhmkkyaqwlfmqd"            // 👉 replace (NOT normal password)
