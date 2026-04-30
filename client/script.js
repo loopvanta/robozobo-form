@@ -61,3 +61,35 @@ form.addEventListener("submit", async (e) => {
   submitBtn.disabled = false;
   submitBtn.innerText = "Register Now 🚀";
 });
+// ===== SUCCESS POPUP FUNCTION =====
+// ===== SUCCESS POPUP FUNCTIONS =====
+function showPopup() {
+  const popup = document.getElementById("successPopup");
+  if (popup) {
+    popup.style.display = "flex";
+    burstConfetti(); // optional 🎉
+  }
+}
+
+function closePopup() {
+  document.getElementById("successPopup").style.display = "none";
+}
+
+function burstConfetti() {
+  const container = document.getElementById("confetti");
+
+  for (let i = 0; i < 60; i++) {
+    const conf = document.createElement("div");
+    conf.classList.add("confetti-piece");
+
+    const x = (Math.random() - 0.5) * 300 + "px";
+    const y = (Math.random() - 0.5) * 300 + "px";
+
+    conf.style.setProperty("--x", x);
+    conf.style.setProperty("--y", y);
+
+    container.appendChild(conf);
+
+    setTimeout(() => conf.remove(), 1000);
+  }
+}
