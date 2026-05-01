@@ -65,7 +65,7 @@ exports.registerUser = async (req, res) => {
           htmlContent: `
            <div style="font-family: Arial, sans-serif; padding: 20px; line-height: 1.6;">
     
-    <h2 style="color: #2c3e50;">Welcome to the Workshop! 🎉</h2>
+    <h2 style="color: #2c3e50;">Welcome to the Summer Camp! 🎉</h2>
 
     <p>Dear Parent,</p>
 
