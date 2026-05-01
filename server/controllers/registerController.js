@@ -63,16 +63,52 @@ exports.registerUser = async (req, res) => {
           to: [{ email: email }],
           subject: "🎉 Registration Successful - Robozobo",
           htmlContent: `
-            <h2>Welcome to Robozobo 🚀</h2>
-            <p>Hi <b>${name}</b>,</p>
-            <p>Your registration has been successfully completed 🎉</p>
-            <hr>
-            <p><b>📘 Course:</b> ${course}</p>
-            <p><b>🕒 Slot:</b> ${slot}</p>
-            <p><b>🎓 Grade:</b> ${grade}</p>
-            <hr>
-            <p>We will contact you soon!</p>
-          `
+           <div style="font-family: Arial, sans-serif; padding: 20px; line-height: 1.6;">
+    
+    <h2 style="color: #2c3e50;">Welcome to the Workshop! 🎉</h2>
+
+    <p>Dear Parent,</p>
+
+    <p>
+      Thank you for registering your child for our upcoming session. 
+      We truly appreciate the time and effort you are investing in your child’s learning journey, 
+      and we are excited to have them join us!
+    </p>
+
+    <p>To ensure a smooth and productive experience, please find the details below:</p>
+
+    <hr>
+
+    <h3>📌 SESSION DETAILS</h3>
+    <p><b>Course:</b> ${course}</p>
+    <p><b>Time Slot:</b> ${slot}</p>
+    <p><b>Grade:</b> ${grade}</p>
+
+    <hr>
+
+    <h3>✅ PRE-SESSION CHECKLIST</h3>
+    <ul>
+      <li>💻 <b>Device:</b> Laptop or PC (Tablets/Phones not recommended)</li>
+      <li>🔐 <b>Login Credentials:</b Keep email login ready</li>
+      <li>🌐 <b>Connectivity:</b> Stable internet connection</li>
+      <li>🧘 <b>Environment:</b> Quiet place for focus</li>
+    </ul>
+
+    <hr>
+
+    <p>
+      We look forward to an inspiring session! 🚀  
+      If you have any questions, feel free to reach out.
+    </p>
+
+    <p style="margin-top:20px;">
+      Warm regards,<br>
+      <b>Robozobo Team 🤖</b>
+    </p>
+
+  </div>
+`
+            
         },
         {
           headers: {
