@@ -104,23 +104,50 @@ gradeSelect.addEventListener("change", () => {
   courseSelect.innerHTML = "";
 
   // extract number from "Grade 3"
-  const gradeNumber = parseInt(grade.replace(/\D/g, ""));
+//   const gradeNumber = parseInt(grade.replace(/\D/g, ""));
 
-  if (gradeNumber >= 3 && gradeNumber <= 5) {
-    // only Game Development
-    courseSelect.innerHTML = `
-      <option value="Game Development">Game Development</option>
-    `;
-  } else if (gradeNumber > 5) {
-    // both courses
-    courseSelect.innerHTML = `
-      <option value="Block-Coding">Block Coding</option>
-      <option value="Game Development">Game Development</option>
-    `;
-  } else {
-    // fallback (optional)
-    courseSelect.innerHTML = `
-      <option value="">Select Course</option>
-    `;
-  }
+//   if (gradeNumber >= 3 && gradeNumber <= 5) {
+//     // only Game Development
+//     courseSelect.innerHTML = `
+//       <option value="Game Development">Game Development</option>
+//     `;
+//   } else if (gradeNumber > 5) {
+//     // both courses
+//     courseSelect.innerHTML = `
+//       <option value="Block-Coding">Block Coding</option>
+//       <option value="Game Development">Game Development</option>
+//     `;
+//   } else {
+//     // fallback (optional)
+//     courseSelect.innerHTML = `
+//       <option value="">Select Course</option>
+//     `;
+//   }
+// });
+const gradeNumber = parseInt(grade.replace(/\D/g, ""));
+
+if (gradeNumber >= 4 && gradeNumber <= 6) {
+  // show ALL 3 courses
+  courseSelect.innerHTML = `
+    <option value="Block-Coding">Block Coding</option>
+    <option value="Game Development">Game Development</option>
+    <option value="Web Development">Web Development</option>
+  `;
+} else if (gradeNumber === 3) {
+  // only Game Development
+  courseSelect.innerHTML = `
+    <option value="Game Development">Game Development</option>
+  `;
+} else if (gradeNumber > 6) {
+  // both courses
+  courseSelect.innerHTML = `
+    <option value="Block-Coding">Block Coding</option>
+    <option value="Game Development">Game Development</option>
+  `;
+} else {
+  // fallback
+  courseSelect.innerHTML = `
+    <option value="">Select Course</option>
+  `;
+}
 });
